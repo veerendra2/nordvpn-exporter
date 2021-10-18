@@ -1,0 +1,30 @@
+$ nordvpn status
+Status: Connected                       Gauge
+Current server: de956.nordvpn.com       Info
+Country: Germany                        Info
+City: Berlin                            Info
+Server IP: 217.138.216.3                Info
+Current technology: OPENVPN             Info
+Current protocol: UDP                   Info
+Transfer: 0 B received, 1.12 KiB sent   Counter
+Uptime: 2 minutes 55 seconds            Counter
+
+$ nordvpn settings
+Technology: OPENVPN                     Info
+Protocol: UDP                           Info
+Firewall: enabled                       Gauge
+Kill Switch: disabled                   Gauge
+CyberSec: enabled                       Gauge
+Obfuscate: disabled                     Gauge
+Notify: enabled                         Gauge
+Auto-connect: disabled                  Gauge
+IPv6: disabled                          Gauge
+DNS: disabled                           Gauge
+
+$ nordvpn --version
+NordVPN Version 3.11.0                  Info
+
+$ nordvpn account
+Account Information:
+Email Address: XX.XX@XX.XX
+VPN Service: Active (Expires on Apr 20th, 2022)         Info
