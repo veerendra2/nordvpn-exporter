@@ -1,1 +1,0 @@
-https://stackoverflow.com/questions/42865724/parse-human-readable-filesizes-into-bytes
