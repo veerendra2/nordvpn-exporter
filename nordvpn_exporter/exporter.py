@@ -50,6 +50,10 @@ version = Info('nordvpn_version', 'Current connected host name')
 service_expiry = Info('nordvpn_service_expiry', 'Service expiry date')
 
 
+toggle_values = {"Connected": 1, "Disconnected": 0,
+                 "enabled": 1, "disabled": 0}
+
+
 def execute(option):
     try:
         output = subprocess.check_output(
@@ -72,42 +76,72 @@ def parse_nordvpn_cli():
     settings_output = execute("settings")
     account_output = execute("account")
     version_output = execute("--version")
+    status = None
+    metrics_values = []
+    status = toggle_values[re.findall(
+        r'(?<=Status:).*', status_output)[0].strip()]
+    print(status)
+    if not status:
+        metrics_values = [status, "N/A", "N/A", "N/A",
+                          "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
+    else:
+        metrics_values = status
+        metrics_values.append(re.findall(r'(?<=Current server:).*',
+                                         status_output)[0].strip())  # 1
+        metrics_values.append(re.findall(r'(?<=Country:).*',
+                                         status_output)[0].strip())  # 2
+        metrics_values.append(re.findall(
+            r'(?<=City:).*', status_output)[0].strip())  # 3
+        metrics_values.append(re.findall(r'(?<=Current technology:).*',
+                                         status_output)[0].strip())  # 4
+        rece_bytes = re.findall(
+            r'(?<=Transfer: )(.+)received', status_output)[0]  # 5
+        sent_bytes = re.findall(
+            r'(?<=received,)(.+)sent', status_output)[0]  # 6
+        metrics_values.append(parse_size(rece_bytes))  # 7
+        metrics_values.append(parse_size(sent_bytes))  # 8
+        metrics_values.append(re.findall(
+            r'(?<=Uptime:).*', status_output)[0].strip())  # 9
+    # These are alway available
+    metrics_values.append(re.findall(
+        r'(?<=Technology:).*', settings_output)[0].strip())  # 10
+    metrics_values.append(re.findall(
+        r'(?<=Protocol:).*', settings_output)[0].strip())  # 11
+    metrics_values.append(re.findall(
+        r'(?<=Firewall:).*', settings_output)[0].strip())   # 12
+    metrics_values.append(re.findall(r'(?<=Kill Switch:).*',
+                                     settings_output)[0].strip())  # 13
+    metrics_values.append(re.findall(
+        r'(?<=CyberSec:).*', settings_output)[0].strip())  # 14
+    metrics_values.append(re.findall(
+        r'(?<=Obfuscate:).*', settings_output)[0].strip())  # 15
+    metrics_values.append(re.findall(
+        r'(?<=Auto-connect:).*', settings_output)[0].strip())  # 16
+    metrics_values.append(re.findall(
+        r'(?<=IPv6:).*', settings_output)[0].strip())  # 17
+    metrics_values.append(re.findall(
+        r'(?<=DNS:).*', settings_output)[0].strip())  # 18
+    metrics_values.append(version_output.split()[2].strip())  # 19
+    metrics_values.append(account_output.split('(')[1].strip())  # 20
+    return metrics_values
 
-    print("Connection->", re.findall(r'(?<=Status:).*',
-          status_output)[0].strip())
-    print("Server->", re.findall(r'(?<=Current server:).*',
-          status_output)[0].strip())
-    print("Country->", re.findall(r'(?<=Country:).*',
-          status_output)[0].strip())
-    print("City->", re.findall(r'(?<=City:).*', status_output)[0].strip())
-    print("Tech->", re.findall(r'(?<=Current technology:).*', status_output)
-          [0].strip())
-    rece_bytes = re.findall(r'(?<=Transfer: )(.+)received', status_output)[0]
-    sent_bytes = re.findall(r'(?<=received,)(.+)sent', status_output)[0]
-    print(parse_size(rece_bytes))
-    print(parse_size(sent_bytes))
-    print("Uptime", re.findall(r'(?<=Uptime:).*', status_output)[0].strip())
-
-    print("Technology->", re.findall(r'(?<=Technology:).*',
-          settings_output)[0].strip())
-    print("Protocol->", re.findall(r'(?<=Protocol:).*',
-          settings_output)[0].strip())
-    print("Firewall->", re.findall(r'(?<=Firewall:).*',
-          settings_output)[0].strip())
-    print("Kill Switch->",
-          re.findall(r'(?<=Kill Switch:).*', settings_output)[0].strip())
-    print("CyberSec->", re.findall(r'(?<=CyberSec:).*',
-          settings_output)[0].strip())
-    print("Obfuscate->", re.findall(r'(?<=Obfuscate:).*',
-          settings_output)[0].strip())
-    print("Auto-connect->",
-          re.findall(r'(?<=Auto-connect:).*', settings_output)[0].strip())
-    print("IPv6->", re.findall(r'(?<=IPv6:).*', settings_output)[0].strip())
-    print("DNS->", re.findall(r'(?<=DNS:).*', settings_output)[0].strip())
-
-    print("Version", version_output.split()[2].strip())
-
-    print("Expire", account_output.split('(')[0].strip())
+# @app.route("/metrics")
 
 
-parse_nordvpn_cli()
+def expose_metrics():
+    results = parse_nordvpn_cli()
+    status.set(results[0])
+    current_server.set(results[1])
+    connected_country.set(results[2])
+    connected_city.set(results[3])
+    connected_ip.set(results[4])
+    current_tech.set(results[5])
+    current_protocol.set(results[6])
+    setting_tech.set(results[7])
+    setting_protocol.set(results[8])
+    version.set(results[9])
+    service_expiry.set(results[10])
+
+
+if __name__ == '__main__':
+    expose_metrics()
