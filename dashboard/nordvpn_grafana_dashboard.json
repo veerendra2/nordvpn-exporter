@@ -1,0 +1,280 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 7,
+    "links": [],
+    "panels": [
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "center",
+                        "displayMode": "auto",
+                        "filterable": true
+                    },
+                    "mappings": [],
+                    "noValue": "N/A",
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 11,
+                "x": 0,
+                "y": 0
+            },
+            "id": 10,
+            "options": {
+                "showHeader": false
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "nordvpn_connected_country_info",
+                    "format": "table",
+                    "instant": true,
+                    "interval": "",
+                    "intervalFactor": 1,
+                    "legendFormat": "",
+                    "refId": "A"
+                }
+            ],
+            "title": "Panel Title",
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 3
+            },
+            "id": 6,
+            "options": {
+                "basemap": {
+                    "config": {},
+                    "type": "default"
+                },
+                "controls": {
+                    "mouseWheelZoom": true,
+                    "showAttribution": true,
+                    "showDebug": false,
+                    "showScale": false,
+                    "showZoom": true
+                },
+                "layers": [
+                    {
+                        "config": {
+                            "color": {
+                                "fixed": "dark-green"
+                            },
+                            "fillOpacity": 0.4,
+                            "shape": "circle",
+                            "showLegend": true,
+                            "size": {
+                                "fixed": 5,
+                                "max": 15,
+                                "min": 2
+                            }
+                        },
+                        "location": {
+                            "mode": "auto"
+                        },
+                        "type": "markers"
+                    }
+                ],
+                "view": {
+                    "id": "zero",
+                    "lat": 0,
+                    "lon": 0,
+                    "shared": false,
+                    "zoom": 2
+                }
+            },
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "nordvpn_connected_country_info",
+                    "interval": "",
+                    "legendFormat": "",
+                    "refId": "A"
+                }
+            ],
+            "title": "Panel Title",
+            "type": "geomap"
+        },
+        {
+            "datasource": null,
+            "gridPos": {
+                "h": 5,
+                "w": 3,
+                "x": 0,
+                "y": 11
+            },
+            "id": 4,
+            "options": {
+                "content": "<img src='https://www.vhv.rs/dpng/d/33-331420_nordvpn-logo-png-transparent-png.png' width=\"200\" />\n           ",
+                "mode": "markdown"
+            },
+            "pluginVersion": "8.1.5",
+            "transparent": true,
+            "type": "text"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "0": {
+                                    "index": 1,
+                                    "text": "Disconnected"
+                                },
+                                "1": {
+                                    "index": 0,
+                                    "text": "Connected"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 0
+                            },
+                            {
+                                "color": "green",
+                                "value": 1
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 5,
+                "x": 3,
+                "y": 11
+            },
+            "id": 2,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "displayType": "Regular",
+                    "exemplar": true,
+                    "expr": "nordvpn_status",
+                    "interval": "",
+                    "legendFormat": "",
+                    "refId": "A",
+                    "valueHandler": "Number Threshold"
+                }
+            ],
+            "title": "NordVPN Status",
+            "type": "stat"
+        }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 30,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "NordVPN",
+    "uid": "VKgtm_Onk",
+    "version": 2
+}
