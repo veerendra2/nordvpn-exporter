@@ -96,6 +96,7 @@ def parse_nordvpn_cli():
             settings.setdefault(fields[0].replace(" ", "_").lower(), fields[1])
     settings.setdefault("version", version_output.split()[2])
     settings.setdefault("hostname", os.uname()[1])
+    status_labels.setdefault("hostname", os.uname()[1])
     return (con_status, status_labels, settings, bytes_received, bytes_sent)
 
 
