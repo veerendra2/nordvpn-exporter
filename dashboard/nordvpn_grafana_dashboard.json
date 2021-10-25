@@ -26,6 +26,23 @@
     "panels": [
         {
             "datasource": null,
+            "gridPos": {
+                "h": 3,
+                "w": 2,
+                "x": 0,
+                "y": 0
+            },
+            "id": 23,
+            "options": {
+                "content": "\n<img src=/public/img/index.png>",
+                "mode": "markdown"
+            },
+            "pluginVersion": "8.1.5",
+            "transparent": true,
+            "type": "text"
+        },
+        {
+            "datasource": null,
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -67,9 +84,9 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 6,
-                "w": 5,
-                "x": 0,
+                "h": 3,
+                "w": 3,
+                "x": 2,
                 "y": 0
             },
             "id": 2,
@@ -129,9 +146,148 @@
             },
             "gridPos": {
                 "h": 3,
-                "w": 4,
+                "w": 3,
                 "x": 5,
                 "y": 0
+            },
+            "id": 12,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/.*/",
+                    "values": true
+                },
+                "text": {},
+                "textMode": "name"
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "nordvpn_connection_info",
+                    "format": "time_series",
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "{{current_server}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Server",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "center",
+                        "displayMode": "auto",
+                        "filterable": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 16,
+                "x": 8,
+                "y": 0
+            },
+            "id": 21,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "nordvpn_settings_info",
+                    "format": "table",
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "",
+                    "refId": "A"
+                }
+            ],
+            "title": "VPN Settings",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "hostname": true,
+                            "instance": true,
+                            "job": true,
+                            "version": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 3,
+                "x": 0,
+                "y": 3
             },
             "id": 8,
             "options": {
@@ -151,7 +307,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "nordvpn_connected_country_info",
+                    "expr": "nordvpn_connection_info",
                     "format": "time_series",
                     "instant": true,
                     "interval": "",
@@ -200,11 +356,11 @@
             },
             "gridPos": {
                 "h": 3,
-                "w": 4,
-                "x": 9,
-                "y": 0
+                "w": 2,
+                "x": 3,
+                "y": 3
             },
-            "id": 12,
+            "id": 13,
             "options": {
                 "colorMode": "value",
                 "graphMode": "area",
@@ -222,15 +378,228 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "nordvpn_current_server_info",
+                    "expr": "nordvpn_connection_info",
                     "format": "time_series",
                     "instant": true,
                     "interval": "",
-                    "legendFormat": "{{server}}",
+                    "legendFormat": "{{city}}",
                     "refId": "A"
                 }
             ],
-            "title": "Server",
+            "title": "City",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 2,
+                "x": 5,
+                "y": 3
+            },
+            "id": 16,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/.*/",
+                    "values": true
+                },
+                "text": {},
+                "textMode": "name"
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "nordvpn_connection_info",
+                    "format": "time_series",
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "{{current_technology}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Current Technology",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 2,
+                "x": 7,
+                "y": 3
+            },
+            "id": 17,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/.*/",
+                    "values": true
+                },
+                "text": {},
+                "textMode": "name"
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "nordvpn_connection_info",
+                    "format": "time_series",
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "{{current_protocol}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Protocol",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 3,
+                "x": 9,
+                "y": 3
+            },
+            "id": 14,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/.*/",
+                    "values": true
+                },
+                "text": {},
+                "textMode": "name"
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "nordvpn_connection_info",
+                    "format": "time_series",
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "{{uptime}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Uptime",
             "transformations": [
                 {
                     "id": "organize",
@@ -298,10 +667,10 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 6,
-                "w": 11,
-                "x": 13,
-                "y": 0
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 3
             },
             "id": 11,
             "options": {
@@ -318,12 +687,13 @@
                 {
                     "exemplar": true,
                     "expr": "nordvpn_status",
+                    "instant": true,
                     "interval": "",
                     "legendFormat": "Status",
                     "refId": "A"
                 }
             ],
-            "title": "Status",
+            "title": "Status Over Time",
             "type": "timeseries"
         },
         {
@@ -331,220 +701,35 @@
             "fieldConfig": {
                 "defaults": {
                     "color": {
-                        "mode": "thresholds"
+                        "mode": "palette-classic"
                     },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 3,
-                "w": 2,
-                "x": 5,
-                "y": 3
-            },
-            "id": 13,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": [],
-                    "fields": "/.*/",
-                    "values": true
-                },
-                "text": {},
-                "textMode": "name"
-            },
-            "pluginVersion": "8.1.5",
-            "targets": [
-                {
-                    "exemplar": true,
-                    "expr": "nordvpn_connected_city_info",
-                    "format": "time_series",
-                    "instant": true,
-                    "interval": "",
-                    "legendFormat": "{{city}}",
-                    "refId": "A"
-                }
-            ],
-            "title": "City",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
                         },
-                        "indexByName": {},
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": null,
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 3,
-                "w": 4,
-                "x": 7,
-                "y": 3
-            },
-            "id": 14,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": [],
-                    "fields": "/.*/",
-                    "values": true
-                },
-                "text": {},
-                "textMode": "name"
-            },
-            "pluginVersion": "8.1.5",
-            "targets": [
-                {
-                    "exemplar": true,
-                    "expr": "nordvpn_uptime_info",
-                    "format": "time_series",
-                    "instant": true,
-                    "interval": "",
-                    "legendFormat": "{{uptime}}",
-                    "refId": "A"
-                }
-            ],
-            "title": "Uptime",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
                         },
-                        "indexByName": {},
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": null,
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 3,
-                "w": 2,
-                "x": 11,
-                "y": 3
-            },
-            "id": 17,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": [],
-                    "fields": "/.*/",
-                    "values": true
-                },
-                "text": {},
-                "textMode": "name"
-            },
-            "pluginVersion": "8.1.5",
-            "targets": [
-                {
-                    "exemplar": true,
-                    "expr": "nordvpn_current_protocol_info",
-                    "format": "time_series",
-                    "instant": true,
-                    "interval": "",
-                    "legendFormat": "{{protocol}}",
-                    "refId": "A"
-                }
-            ],
-            "title": "Protocol",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
                         },
-                        "indexByName": {},
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": null,
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
                     },
                     "mappings": [],
                     "thresholds": {
@@ -553,133 +738,74 @@
                             {
                                 "color": "green",
                                 "value": null
-                            },
+                            }
+                        ]
+                    },
+                    "unit": "bytes"
+                },
+                "overrides": [
+                    {
+                        "__systemRef": "hideSeriesFrom",
+                        "matcher": {
+                            "id": "byNames",
+                            "options": {
+                                "mode": "exclude",
+                                "names": [
+                                    "nordvpn_bytes_received{hostname=\"b5ad9569971d\", instance=\"192.168.0.120:8082\", job=\"nordvpn-exporter\"}"
+                                ],
+                                "prefix": "All except:",
+                                "readOnly": true
+                            }
+                        },
+                        "properties": [
                             {
-                                "color": "red",
-                                "value": 80
+                                "id": "custom.hideFrom",
+                                "value": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                }
                             }
                         ]
                     }
-                },
-                "overrides": []
+                ]
             },
             "gridPos": {
-                "h": 3,
-                "w": 5,
+                "h": 8,
+                "w": 12,
                 "x": 0,
                 "y": 6
             },
-            "id": 18,
+            "id": 19,
             "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
+                "legend": {
                     "calcs": [],
-                    "fields": "/.*/",
-                    "values": true
+                    "displayMode": "list",
+                    "placement": "bottom"
                 },
-                "text": {},
-                "textMode": "name"
+                "tooltip": {
+                    "mode": "single"
+                }
             },
-            "pluginVersion": "8.1.5",
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "nordvpn_service_expiry_info",
-                    "format": "time_series",
-                    "instant": true,
+                    "expr": "nordvpn_bytes_received",
                     "interval": "",
-                    "legendFormat": "{{expiry}}",
+                    "legendFormat": "Bytes Received",
                     "refId": "A"
-                }
-            ],
-            "title": "Expiry",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true
-                        },
-                        "indexByName": {},
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": null,
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
                 },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 3,
-                "w": 5,
-                "x": 0,
-                "y": 9
-            },
-            "id": 16,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": [],
-                    "fields": "/.*/",
-                    "values": true
-                },
-                "text": {},
-                "textMode": "name"
-            },
-            "pluginVersion": "8.1.5",
-            "targets": [
                 {
                     "exemplar": true,
-                    "expr": "nordvpn_current_tech_info",
-                    "format": "time_series",
-                    "instant": true,
+                    "expr": "nordvpn_bytes_sent",
+                    "hide": false,
                     "interval": "",
-                    "legendFormat": "{{tech}}",
-                    "refId": "A"
+                    "legendFormat": "Bytes Sent",
+                    "refId": "B"
                 }
             ],
-            "title": "Current Technology",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true
-                        },
-                        "indexByName": {},
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "stat"
+            "title": "Traffic",
+            "type": "timeseries"
         }
     ],
     "refresh": "",
@@ -690,12 +816,12 @@
         "list": []
     },
     "time": {
-        "from": "now-5m",
+        "from": "now-6h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "",
     "title": "NordVPN",
     "uid": "VKgtm_Onk",
-    "version": 24
+    "version": 40
 }

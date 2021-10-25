@@ -89,11 +89,12 @@ def parse_nordvpn_cli():
                         r'(?<=received,)(.+)sent', fields[1])[0].strip())
                 else:
                     status_labels.setdefault(
-                        fields[0].replace(" ", "_").lower(), fields[1])
+                        fields[0].replace(" ", "_").replace("-", "_").lower(), fields[1])
     for settings_line in settings_output.splitlines():
         fields = [x.strip() for x in settings_line.split(':')]
         if len(fields) == 2:
-            settings.setdefault(fields[0].replace(" ", "_").lower(), fields[1])
+            settings.setdefault(fields[0].replace(
+                " ", "_").replace("-", "_").lower(), fields[1])
     settings.setdefault("version", version_output.split()[2])
     settings.setdefault("hostname", os.uname()[1])
     status_labels.setdefault("hostname", os.uname()[1])
