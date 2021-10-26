@@ -111,6 +111,7 @@
                     "displayType": "Regular",
                     "exemplar": true,
                     "expr": "nordvpn_status",
+                    "instant": true,
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A",
@@ -615,86 +616,86 @@
             "type": "stat"
         },
         {
-            "datasource": null,
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "palette-classic"
-                    },
-                    "custom": {
-                        "axisLabel": "",
-                        "axisPlacement": "auto",
-                        "barAlignment": 0,
-                        "drawStyle": "line",
-                        "fillOpacity": 0,
-                        "gradientMode": "none",
-                        "hideFrom": {
-                            "legend": false,
-                            "tooltip": false,
-                            "viz": false
-                        },
-                        "lineInterpolation": "linear",
-                        "lineWidth": 1,
-                        "pointSize": 5,
-                        "scaleDistribution": {
-                            "type": "linear"
-                        },
-                        "showPoints": "auto",
-                        "spanNulls": false,
-                        "stacking": {
-                            "group": "A",
-                            "mode": "none"
-                        },
-                        "thresholdsStyle": {
-                            "mode": "off"
-                        }
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
+            "cards": {
+                "cardHSpacing": 2,
+                "cardMinWidth": 5,
+                "cardRound": null,
+                "cardVSpacing": 2
             },
+            "color": {
+                "cardColor": "#b4ff00",
+                "colorScale": "sqrt",
+                "colorScheme": "interpolateGnYlRd",
+                "defaultColor": "#757575",
+                "exponent": 0.5,
+                "max": 1,
+                "min": 0,
+                "mode": "spectrum",
+                "thresholds": []
+            },
+            "datasource": null,
             "gridPos": {
                 "h": 8,
                 "w": 12,
                 "x": 12,
                 "y": 3
             },
+            "highlightCards": true,
             "id": 11,
-            "options": {
-                "legend": {
-                    "calcs": [],
-                    "displayMode": "list",
-                    "placement": "bottom"
-                },
-                "tooltip": {
-                    "mode": "single"
-                }
+            "legend": {
+                "show": true
+            },
+            "nullPointMode": "as zero",
+            "pageSize": 15,
+            "seriesFilterIndex": -1,
+            "statusmap": {
+                "ConfigVersion": "v1"
             },
             "targets": [
                 {
+                    "$$hashKey": "object:24",
+                    "aggregation": "Last",
+                    "decimals": 2,
+                    "displayAliasType": "Warning / Critical",
+                    "displayType": "Regular",
+                    "displayValueWithAlias": "Never",
                     "exemplar": true,
                     "expr": "nordvpn_status",
-                    "instant": true,
+                    "hide": false,
+                    "instant": false,
                     "interval": "",
                     "legendFormat": "Status",
-                    "refId": "A"
+                    "refId": "A",
+                    "units": "none",
+                    "valueHandler": "Number Threshold"
                 }
             ],
-            "title": "Status Over Time",
-            "type": "timeseries"
+            "title": "Status",
+            "tooltip": {
+                "extraInfo": "",
+                "freezeOnClick": true,
+                "items": [],
+                "show": true,
+                "showExtraInfo": false,
+                "showItems": false
+            },
+            "type": "flant-statusmap-panel",
+            "useMax": true,
+            "usingPagination": false,
+            "xAxis": {
+                "show": true
+            },
+            "yAxis": {
+                "maxWidth": -1,
+                "minWidth": -1,
+                "show": true
+            },
+            "yAxisSort": "metrics",
+            "yLabel": {
+                "delimiter": "",
+                "labelTemplate": "",
+                "usingSplitLabel": false
+            }
         },
         {
             "datasource": null,
@@ -715,7 +716,7 @@
                             "tooltip": false,
                             "viz": false
                         },
-                        "lineInterpolation": "linear",
+                        "lineInterpolation": "smooth",
                         "lineWidth": 1,
                         "pointSize": 5,
                         "scaleDistribution": {
@@ -741,34 +742,9 @@
                             }
                         ]
                     },
-                    "unit": "bytes"
+                    "unit": "decbytes"
                 },
-                "overrides": [
-                    {
-                        "__systemRef": "hideSeriesFrom",
-                        "matcher": {
-                            "id": "byNames",
-                            "options": {
-                                "mode": "exclude",
-                                "names": [
-                                    "nordvpn_bytes_received{hostname=\"b5ad9569971d\", instance=\"192.168.0.120:8082\", job=\"nordvpn-exporter\"}"
-                                ],
-                                "prefix": "All except:",
-                                "readOnly": true
-                            }
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.hideFrom",
-                                "value": {
-                                    "legend": false,
-                                    "tooltip": false,
-                                    "viz": false
-                                }
-                            }
-                        ]
-                    }
-                ]
+                "overrides": []
             },
             "gridPos": {
                 "h": 8,
@@ -790,17 +766,18 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "nordvpn_bytes_received",
+                    "expr": "rate(nordvpn_bytes_sent_total[5m])",
+                    "hide": false,
                     "interval": "",
-                    "legendFormat": "Bytes Received",
+                    "legendFormat": "Bytes Sent",
                     "refId": "A"
                 },
                 {
                     "exemplar": true,
-                    "expr": "nordvpn_bytes_sent",
+                    "expr": "rate(nordvpn_bytes_received_total[5m])",
                     "hide": false,
                     "interval": "",
-                    "legendFormat": "Bytes Sent",
+                    "legendFormat": "Bytes Received",
                     "refId": "B"
                 }
             ],
@@ -816,12 +793,12 @@
         "list": []
     },
     "time": {
-        "from": "now-6h",
+        "from": "now-1h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "",
     "title": "NordVPN",
     "uid": "VKgtm_Onk",
-    "version": 40
+    "version": 61
 }

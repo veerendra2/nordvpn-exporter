@@ -8,7 +8,7 @@ import os
 import argparse
 
 from flask import Flask
-from prometheus_client import make_wsgi_app, Gauge, Info
+from prometheus_client import make_wsgi_app, Gauge, Info, Counter
 from waitress import serve
 
 __author__ = "veerendra2"
@@ -20,9 +20,9 @@ __maintainer__ = "veerendra2"
 app = Flask("NordVPN-Exporter")
 
 # Define Metrics
-bytes_sent = Gauge('nordvpn_bytes_sent', 'Bytes sent', ['hostname'])
-bytes_received = Gauge('nordvpn_bytes_received',
-                       'Bytes received', ['hostname'])
+bytes_sent = Counter('nordvpn_bytes_sent', 'Bytes sent', ['hostname'])
+bytes_received = Counter('nordvpn_bytes_received',
+                         'Bytes received', ['hostname'])
 settings = Info('nordvpn_settings', 'nordvn client settings')
 connection = Info('nordvpn_connection', 'nordvn connection')
 status = Gauge('nordvpn_status', 'nordvn status', ['hostname'])
@@ -103,10 +103,10 @@ def parse_nordvpn_cli():
 
 @app.route("/metrics")
 def expose_metrics():
-    status_info, status_labels, settings_info, bytes_sent_info, bytes_received_info = parse_nordvpn_cli()
+    status_info, status_labels, settings_info, bytes_received_info, bytes_sent_info = parse_nordvpn_cli()
     status.labels(os.uname()[1]).set(status_info)
-    bytes_received.labels(os.uname()[1]).set(bytes_received_info)
-    bytes_sent.labels(os.uname()[1]).set(bytes_sent_info)
+    bytes_received.labels(os.uname()[1]).inc(bytes_received_info)
+    bytes_sent.labels(os.uname()[1]).inc(bytes_sent_info)
     connection.info(status_labels)
     settings.info(settings_info)
     return make_wsgi_app()
