@@ -18,10 +18,11 @@ setuptools.setup(
     project_urls={
         "Bug Tracker": "https://github.com/veerendra2/nordvpn-exporter/issues",
     },
-    packages=setuptools.find_packages(where="nordvpn_exporter"),
+    packages=setuptools.find_packages(where="src"),
+    install_requires=["prometheus_client", "waitress", "Flask"],
     entry_points={'console_scripts': [
         'nordvpn_exporter = nordvpn_exporter:main']},
-    package_dir={'nordvpn_exporter': 'nordvpn_exporter/'},
+    package_dir={'': 'src'},
     python_requires=">=3.4",
     classifiers=[
         "Programming Language :: Python :: 3.4",

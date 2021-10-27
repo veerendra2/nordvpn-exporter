@@ -1,0 +1,3 @@
+include nordvpn_exporter.toml
+include *.md
+include LICENSE
