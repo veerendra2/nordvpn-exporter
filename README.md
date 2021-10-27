@@ -1,6 +1,12 @@
 ![GitHub](https://img.shields.io/github/license/veerendra2/nordvpn-exporter)
 ![GitHub Repo stars](https://img.shields.io/github/stars/veerendra2/nordvpn-exporter)
 ![GitHub issues](https://img.shields.io/github/issues/veerendra2/nordvpn-exporter)
+![PyPI - Status](https://img.shields.io/pypi/status/nordvpn-exporter)
+![PyPI](https://img.shields.io/pypi/v/nordvpn-exporter?style=plastic)
+![PyPI - License](https://img.shields.io/pypi/l/nordvpn-exporter)
+![PyPI - Format](https://img.shields.io/pypi/format/nordvpn-exporter)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/nordvpn-exporter)
+[![Release](https://github.com/veerendra2/nordvpn-exporter/actions/workflows/release.yaml/badge.svg)](https://github.com/veerendra2/nordvpn-exporter/actions/workflows/release.yaml)
 
 # `nordvpn` Prometheus Exporter
 > This is not official NordVPN exporter. 
