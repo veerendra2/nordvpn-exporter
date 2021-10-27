@@ -114,8 +114,7 @@ def expose_metrics():
 
 @ app.route("/")
 def mainPage():
-    return ("<h1>NordVPN Exporter</h1>" +
-            "Click <a href='/metrics'>here</a> to see metrics.")
+    return ("<h1>NordVPN Exporter</h1>" + "Click <a href='/metrics'>here</a> to see metrics.")
 
 
 def main():
@@ -131,7 +130,7 @@ def main():
         PORT = results.port
     print("Starting NordVPN Exporter on http://localhost:{}".format(PORT))
     if results.daemon:
-        print("[*] Running background")
+        print("[*] Running in background")
         daemonize()
     serve(app, host='0.0.0.0', port=PORT)
 
