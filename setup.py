@@ -8,10 +8,15 @@ if (3, 0) < version < (3, 4):
     print('nordvpn_exporter requires Python version 3.4 or later ({}.{} detected).'.format(*version))
     sys.exit(1)
 
+with open('README.md', 'r', encoding='utf-8') as fh:
+    long_description = fh.read()
+    
 setuptools.setup(
     name='nordvpn_exporter',
     version='1.0',
     description='A simple NordVPN Exporter',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/veerendra2/nordvpn-exporter',
     author='Veerendra K',
     license='Apache 2.0',
