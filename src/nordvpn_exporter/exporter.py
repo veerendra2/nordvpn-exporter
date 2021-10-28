@@ -124,7 +124,7 @@ def main():
                         dest='daemon', default=False, help='Run as daemon')
     parser.add_argument('-p', action='store',
                         dest='port', help='Port')
-    parser.add_argument('-v', action='version', version='%(prog)s 1.0')
+    parser.add_argument('-v', action='version', version='%(prog)s 1.1')
     results = parser.parse_args()
     if results.port:
         PORT = results.port
