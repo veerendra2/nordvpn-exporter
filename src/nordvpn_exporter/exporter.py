@@ -13,7 +13,6 @@ from waitress import serve
 
 __author__ = "veerendra2"
 __license__ = "Apache 2.0"
-__version__ = "1.0"
 __maintainer__ = "veerendra2"
 
 
