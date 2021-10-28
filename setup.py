@@ -21,7 +21,9 @@ setuptools.setup(
     author='Veerendra K',
     license='Apache 2.0',
     project_urls={
+        'Documentation': 'https://github.com/veerendra2/nordvpn-exporter/blob/main/README.md',
         "Bug Tracker": "https://github.com/veerendra2/nordvpn-exporter/issues",
+        'Source Code': 'https://github.com/veerendra2/nordvpn-exporter',
     },
     packages=setuptools.find_packages(where="src"),
     install_requires=["prometheus_client", "waitress", "Flask"],
