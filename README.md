@@ -45,6 +45,9 @@ optional arguments:
 $ nordvpn_exporter 
 Starting NordVPN Exporter on http://localhost:8082
 ```
+
+List of metrics: [wiki](https://github.com/veerendra2/nordvpn-exporter/wiki)
+
 * I created a simple "daemonize" option to run exporter background 
 ```
 $ nordvpn_exporter -d
